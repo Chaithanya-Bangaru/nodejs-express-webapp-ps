@@ -1,10 +1,12 @@
 {
   "name": "nodejs-express-webapp-ps",
   "version": "1.0.0",
-  "description": "",
+  "description": "A NodeJS server side web app using Express",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "DEBUG=app nodemon app.js",
+    "eslint": "eslint app.js"
   },
   "repository": {
     "type": "git",
@@ -19,13 +21,27 @@
   "dependencies": {
     "bootstrap": "4.2.1",
     "chalk": "2.4.2",
+    "debug": "4.1.1",
     "express": "4.16.4",
     "jquery": "3.3.1",
-    "morgan": "1.9.1"
+    "morgan": "1.9.1",
+    "nodemon": "1.18.9",
+    "pug": "^2.0.3"
   },
   "devDependencies": {
     "eslint": "5.12.1",
     "eslint-config-airbnb-base": "13.1.0",
     "eslint-plugin-import": "2.15.0"
+  },
+  "nodemonConfig": {
+    "restartable": "rcb",
+    "delay": "1400",
+    "ignore": [
+      "node_modules/*"
+    ],
+    "env": {
+      "PORT": "7000",
+      "NODE_ENV": "development"
+    }
   }
 }

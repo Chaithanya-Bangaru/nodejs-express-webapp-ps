@@ -1,26 +1,29 @@
-var express = require('express'); // helps on serving
-var chalk = require('chalk'); // log statements coloring
-var debug = require('debug')('app');
-var morgan = require('morgan'); // logging 
-var path = require('path'); // to help on relative/absolute paths
+const express = require('express'); // helps on serving
+const chalk = require('chalk'); // log statements coloring
+const debug = require('debug')('app');
+const morgan = require('morgan'); // logging
+const path = require('path'); // to help on relative/absolute paths
 
-var app = express();
+const app = express();
+// const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 
-app.listen(3000,function(){
-    //console.log('Express app listening on port '+chalk.green('3000'));
-    //console.log(`Express app listening on port ${chalk.green('3000')}`);
-    debug(`Express app listening on port ${chalk.green('3000')}`);
+app.listen(port, () => { // Arrow function as per ES Lint
+  // console.log('Express app listening on port '+chalk.green('3000'));
+  // console.log(`Express app listening on port ${chalk.green('3000')}`);
+  debug(`NodeJS Express webapp listening on port ${chalk.green(port)}`);
 });
 // using middlewares
 app.use(morgan('tiny')); // format called combined, tiny etc
-//app.use(express.static(path.join(__dirname,'/public/'))); // tells where to look for static files
+// app.use(express.static(path.join(__dirname,'/public/'))); // tells where to look for static files
+app.use('/css', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css/'))); // looks for bootstrap css files in the folder
+app.use('/js/', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/js/'))); // looks for bootstrap js files in the folder
+app.use('/js/', express.static(path.join(__dirname, '/node_modules/jquery/dist/'))); // looks for jquery dist files in the folder
+app.set('views', './src/views');
+app.set('view engine', 'pug');
 
-app.use('/css',express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css/'))); // looks for bootstrap css files in the folder
-app.use('/js/',express.static(path.join(__dirname, '/node_modules/bootstrap/dist/js/')));  // looks for bootstrap js files in the folder
-app.use('/js/',express.static(path.join(__dirname, '/node_modules/jquery/dist/'))); // looks for jquery dist files in the folder
-
-
-app.get('/',function(req,res){
-    //res.send('Hello from Express');
-    res.sendFile(path.join(__dirname,'/views/','/index.html'));
+app.get('/', (req, res) => {
+  // res.send('Hello from Express');
+  // res.sendFile(path.join(__dirname, '/views/', '/index.html'));
+  res.render('index');
 });
