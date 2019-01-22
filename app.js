@@ -20,10 +20,15 @@ app.use('/css', express.static(path.join(__dirname, '/node_modules/bootstrap/dis
 app.use('/js/', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/js/'))); // looks for bootstrap js files in the folder
 app.use('/js/', express.static(path.join(__dirname, '/node_modules/jquery/dist/'))); // looks for jquery dist files in the folder
 app.set('views', './src/views');
-app.set('view engine', 'pug');
+// app.set('view engine', 'pug'); // pug templating  language
+app.set('view engine', 'ejs'); // ejs templating just like jsp scriptlets
 
 app.get('/', (req, res) => {
   // res.send('Hello from Express');
   // res.sendFile(path.join(__dirname, '/views/', '/index.html'));
-  res.render('index');
+  // res.render('index'); // render a view called index
+  res.render('index', {
+    title: 'My Book Library',
+    list: ['a', 'b'],
+  }); // render a view called index
 });
