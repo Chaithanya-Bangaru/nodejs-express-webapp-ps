@@ -1,0 +1,23 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <h1>My NodeJS app using EJS templating engine.</h1>
+    <h3>Welcome to
+        <%= title %>
+    </h3>
+    <ul>
+        <!-- Embedded JS - Add JS in html -->
+        <% for(let i=0; i<list.length; i++) { %>
+        <li>
+            <!-- refer variables from js -->
+            <%= list[i] %>
+        </li>
+        <%}%>
+    </ul>
+</body>
+
+</html>
