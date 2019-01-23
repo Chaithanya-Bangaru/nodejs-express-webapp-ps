@@ -30,5 +30,13 @@ app.get('/', (req, res) => {
   res.render('index', {
     title: 'My Book Library',
     list: ['a', 'b'],
+    nav: [{
+      name: 'Books',
+      link: '/books',
+    }, {
+      name: 'Authors',
+      link: '/authors',
+    }],
+
   }); // render a view called index
 });
