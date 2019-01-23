@@ -15,7 +15,7 @@ app.listen(port, () => { // Arrow function as per ES Lint
 });
 // using middlewares
 app.use(morgan('tiny')); // format called combined, tiny etc
-// app.use(express.static(path.join(__dirname,'/public/'))); // tells where to look for static files
+app.use(express.static(path.join(__dirname, '/public/'))); // tells where to look for static files
 app.use('/css', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css/'))); // looks for bootstrap css files in the folder
 app.use('/js/', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/js/'))); // looks for bootstrap js files in the folder
 app.use('/js/', express.static(path.join(__dirname, '/node_modules/jquery/dist/'))); // looks for jquery dist files in the folder
