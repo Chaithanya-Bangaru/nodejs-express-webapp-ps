@@ -5,9 +5,15 @@ const morgan = require('morgan'); // logging
 const path = require('path'); // to help on relative/absolute paths
 
 const app = express();
-
+const nav = [{
+  name: 'Book',
+  link: '/books',
+}, {
+  name: 'Author',
+  link: '/authors',
+}];
 // const bookRouter = express.Router();
-const bookRouter = require('./src/routes/bookRoutes'); // importing js file in js
+const bookRouter = require('./src/routes/bookRoutes')(nav); // importing js file in js
 // const port = process.env.port || 3000;
 const port = process.env.PORT || 3000;
 
@@ -37,13 +43,6 @@ app.get('/', (req, res) => {
   // res.render('index'); // render a view called index
   res.render('index', {
     title: 'My Book Library',
-    nav: [{
-      name: 'Books',
-      link: '/books',
-    }, {
-      name: 'Authors',
-      link: '/authors',
-    }],
 
   }); // render a view called index
 });
