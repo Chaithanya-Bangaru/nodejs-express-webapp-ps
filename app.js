@@ -1,8 +1,9 @@
 const express = require('express'); // helps on serving
 const chalk = require('chalk'); // log statements coloring
-const debug = require('debug')('app'); // passing the app as parameter
+const debug = require('debug')('app,app:*'); // passing the app as parameter
 const morgan = require('morgan'); // logging
 const path = require('path'); // to help on relative/absolute paths
+// const sql = require('mssql');
 
 const app = express();
 const nav = [{
@@ -13,9 +14,25 @@ const nav = [{
   link: '/authors',
 }];
 // const bookRouter = express.Router();
+// const config = {
+//   user: 'chaithanya',
+//   password: 'Ajavad@123',
+//   server: 'mssqlserver-rcb.database.windows.net',
+//   You can use 'localhost\\instance' to connect to named instance
+//   database: 'nodejs-express-webapp-rcb',
+//   options: {
+//     encrypt: true, // Use this if you're on Windows Azure
+//   },
+// };
+
+// sql.connect(config).catch((err) => {
+//   debug(err);
+//   // console.log(err);
+// });
 const bookRouter = require('./src/routes/bookRoutes')(nav); // importing js file in js
 // const port = process.env.port || 3000;
 const port = process.env.PORT || 3000;
+
 
 app.listen(port, () => { // Arrow function as per ES Lint
   // console.log('Express app listening on port '+chalk.green('3000'));
@@ -34,7 +51,6 @@ app.set('view engine', 'ejs'); // ejs templating just like jsp scriptlets
 
 // app.get('/books',(req,res)=>{ res.send('Books page by Ivaan')});
 // app.get('/authors',(req,res)=>{ res.send('Authors page by Ivaan')});
-
 
 app.use('/books', bookRouter);
 app.get('/', (req, res) => {

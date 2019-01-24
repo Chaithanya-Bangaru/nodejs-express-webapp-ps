@@ -1,6 +1,8 @@
 const express = require('express');
 // const app = express();
 const bookRouter = express.Router();
+const debug = require('debug')('app:bookRoutes'); // passing the app as parameter
+// const sql = require('mssql');
 
 const books = [{
   isbn: '9781593275846',
@@ -42,11 +44,20 @@ function myRouter(nav) {
   bookRouter.route('/')
     .get((req, res) => {
       // res.send('Hello Books.');
+      // ((){}()) IFFY
+
+      // const request = new sql.Request();
+      // request.query('select * from books')
+      //  .then((result) => {
+      // debug(result);
+      // console.log(result.rowsAffected);
       res.render('bookListView', {
         title: 'My Book Library',
         nav,
+        // books: result.recordset,
         books,
       });
+      //  });
     });
 
   bookRouter.route('/:id')
