@@ -72,6 +72,7 @@ bookRouter.route('/:id')
     link: '/authors',
    }],
    book: books[id],
+  
 
   });
  });

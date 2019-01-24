@@ -1,13 +1,13 @@
 const express = require('express'); // helps on serving
 const chalk = require('chalk'); // log statements coloring
-const debug = require('debug')('app');
+const debug = require('debug')('app'); // passing the app as parameter
 const morgan = require('morgan'); // logging
 const path = require('path'); // to help on relative/absolute paths
 
 const app = express();
 
 // const bookRouter = express.Router();
-const bookRouter = require('./src/routes/bookRoutes');
+const bookRouter = require('./src/routes/bookRoutes'); // importing js file in js
 // const port = process.env.port || 3000;
 const port = process.env.PORT || 3000;
 
