@@ -1,13 +1,13 @@
 const express = require('express');
-// const app = express();
-const bookRouter = express.Router();
-const debug = require('debug')('app:bookRoutes'); // passing the app as parameter
+const mongoClient = require('mongodb').MongoClient; // object destructuring as a new standard
 
-// const sql = require('mssql');
+
+const adminRouter = express.Router();
+const debug = require('debug')('app:adminRoutes'); // passing the app as parameter
 
 const books = [{
   isbn: '9781593275846',
-  title: 'Eloquent JavaScript, Second Edition',
+  title: 'ELoquent JavaScript, Second Edition',
   genre: 'Historical Fiction',
   read: false,
   subtitle: 'A Modern Introduction to Programming',
@@ -19,7 +19,7 @@ const books = [{
 },
 {
   isbn: '9781449325862',
-  title: 'Git Pocket Guide',
+  title: 'GIT Pocket Guide',
   subtitle: 'A Working Introduction',
   author: 'Richard E. Silverman',
   published: '2013-08-02T00:00:00.000Z',
@@ -30,7 +30,7 @@ const books = [{
 },
 {
   isbn: '9781449331818',
-  title: 'Learning JavaScript Design Patterns',
+  title: 'LEarning JavaScript Design Patterns',
   subtitle: 'A JavaScript and jQuery Developer\'s Guide',
   author: 'Addy Osmani',
   published: '2012-07-01T00:00:00.000Z',
@@ -41,37 +41,34 @@ const books = [{
 },
 ];
 
-function myRouter(nav) {
-  bookRouter.route('/')
-    .get((req, res) => {
-      // res.send('Hello Books.');
-      // ((){}()) IFFY
 
-      // const request = new sql.Request();      
-      // request.query('select * from books')
-      //  .then((result) => {
-      // debug(result);
-      // console.log(result.rowsAffected);
-      res.render('bookListView', {
-        title: 'My Book Library',
-        nav,
-        // books: result.recordset,
-        books,
-      });
-      //  });
-    });
-
-  bookRouter.route('/:id')
+function adRouter(nav) {
+  adminRouter.route('/')
     .get((req, res) => {
-      // const id = req.params.id;
-      // object destructuring notation means looks for the id param in the object called req.params
-      const { id } = req.params;
-      res.render('bookView', {
-        title: 'My Book Library',
-        nav,
-        book: books[id],
-      });
+      let client;
+      const url = 'mongodb://localhost:27017';
+      // Database Name
+      const dbName = 'bookLibrary';
+
+      // IFFY ((){}())
+      (async function mongo() {
+        try {
+          client = await mongoClient.connect(url);
+          debug('------connected to mongodb');
+          const dbC = client.db(dbName);
+          // res.send('----inserting books');
+          const response = await dbC.collection('books').insertMany(books);
+          res.json(response);
+          res.send('---inserted books');
+        } catch (error) {
+          debug('error connecting to mongodb ', error);
+          debug(error.stack);
+        }
+        client.close();
+      }());
+      
+      // debug(res);
     });
-  return bookRouter;
+  return adminRouter;
 }
-module.exports = myRouter;
+module.exports = adRouter;

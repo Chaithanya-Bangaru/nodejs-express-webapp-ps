@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "DEBUG=* nodemon app.js",
+    "start": "DEBUG=app,app:* nodemon app.js",
     "eslint": "eslint app.js",
     "ejslint": "ejslint app.js"
   },
@@ -27,6 +27,7 @@
     "ejs-lint": "^0.3.0",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
+    "mongodb": "^3.1.13",
     "morgan": "^1.9.1",
     "mssql": "^4.3.0",
     "nodemon": "^1.18.9",
@@ -38,7 +39,7 @@
     "eslint-plugin-import": "2.15.0"
   },
   "nodemonConfig": {
-    "restartable": "rcb",
+    "restartable": "rb",
     "delay": "1400",
     "ignore": [
       "node_modules/*"
