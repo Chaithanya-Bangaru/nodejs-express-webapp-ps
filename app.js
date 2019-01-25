@@ -30,7 +30,6 @@ const nav = [{
 //   // console.log(err);
 // });
 const bookRouter = require('./src/routes/bookRoutes')(nav); // importing js file in js
-const adminRouter = require('./src/routes/adminRoutes')(nav); // importing js file in js
 // const port = process.env.port || 3000;
 const port = process.env.PORT || 3000;
 
@@ -42,12 +41,6 @@ app.listen(port, () => { // Arrow function as per ES Lint
 });
 // using middlewares
 app.use(morgan('tiny')); // format called combined, tiny etc
-
-// app.use((req, res, next) => {
-//   debug('------------in middleware');
-//   next();
-// });
-
 app.use(express.static(path.join(__dirname, '/public/'))); // tells where to look for static files
 app.use('/css', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css/'))); // looks for bootstrap css files in the folder
 app.use('/js/', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/js/'))); // looks for bootstrap js files in the folder
@@ -60,7 +53,6 @@ app.set('view engine', 'ejs'); // ejs templating just like jsp scriptlets
 // app.get('/authors',(req,res)=>{ res.send('Authors page by Ivaan')});
 
 app.use('/books', bookRouter);
-app.use('/admin', adminRouter);
 app.get('/', (req, res) => {
   // res.send('Hello from Express');
   // res.sendFile(path.join(__dirname, '/views/', '/index.html'));

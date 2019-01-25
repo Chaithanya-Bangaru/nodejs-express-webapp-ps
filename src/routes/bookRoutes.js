@@ -2,7 +2,6 @@ const express = require('express');
 // const app = express();
 const bookRouter = express.Router();
 const debug = require('debug')('app:bookRoutes'); // passing the app as parameter
-
 // const sql = require('mssql');
 
 const books = [{
@@ -47,7 +46,7 @@ function myRouter(nav) {
       // res.send('Hello Books.');
       // ((){}()) IFFY
 
-      // const request = new sql.Request();      
+      // const request = new sql.Request();
       // request.query('select * from books')
       //  .then((result) => {
       // debug(result);
