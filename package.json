@@ -7,7 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "DEBUG=* nodemon app.js",
     "eslint": "eslint app.js",
-    "ejslint": "ejslint app.js"
+    "ejslint": "ejslint app.js",
+    "pm2-start": "pm2 start app.js",
+    "pm2-list": "pm2 list",
+    "pm2-stop": "pm2 stop app",
+    "pm2-monit": "pm2 monit",
+    "pm2-start-more": "pm2 start app.js -i 3"
   },
   "repository": {
     "type": "git",
@@ -30,6 +35,7 @@
     "mongodb": "^3.1.13",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.9",
+    "pm2": "^3.2.9",
     "pug": "2.0.3"
   },
   "devDependencies": {

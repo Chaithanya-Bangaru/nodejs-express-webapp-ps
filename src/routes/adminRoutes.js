@@ -5,7 +5,7 @@ const mongoClient = require('mongodb').MongoClient; // object destructuring as a
 const adminRouter = express.Router();
 const debug = require('debug')('app:adminRoutes'); // passing the app as parameter
 
-let books = [{
+const books = [{
   isbn: '9781593275846',
   title: 'ELoquent JavaScript, Second Edition',
   genre: 'Historical Fiction',
@@ -43,7 +43,7 @@ let books = [{
 
 
 function adRouter(nav) {
-  adminRouter.route('/')
+  adminRouter.route('/admin')
     .get((req, res) => {
       let client;
       const url = 'mongodb://localhost:27017';

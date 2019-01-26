@@ -30,6 +30,7 @@ const nav = [{
 //   // console.log(err);
 // });
 const bookRouter = require('./src/routes/bookRoutes')(nav); // importing js file in js
+const adminRouter = require('./src/routes/adminRoutes')(nav); // importing js file in js
 // const port = process.env.port || 3000;
 const port = process.env.PORT || 3000;
 
@@ -53,11 +54,12 @@ app.set('view engine', 'ejs'); // ejs templating just like jsp scriptlets
 // app.get('/authors',(req,res)=>{ res.send('Authors page by Ivaan')});
 
 app.use('/books', bookRouter);
+app.use('/admin', adminRouter);
 app.get('/', (req, res) => {
   // res.send('Hello from Express');
   // res.sendFile(path.join(__dirname, '/views/', '/index.html'));
   // res.render('index'); // render a view called index
-  res.render('index', {
+  res.render('bookListView', {
     title: 'My Book Library',
 
   }); // render a view called index
